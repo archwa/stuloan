@@ -17,7 +17,7 @@ An example is provided in info.yml with a current principal balance of **$10,000
 
 ## Example
 
-See `example.ipynb` for a working example.
+See [example.ipynb](https://github.com/archwa/stuloan/blob/master/example.ipynb) for a working example.
 
 **info.yml**
 ```yaml
