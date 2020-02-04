@@ -1,0 +1,74 @@
+#!/bin/bash
+
+DEP_FILE=requirements.txt
+CMD=$1
+DEP=$2
+
+if [ -z $CMD ]
+then
+  printf "[dep] Please provide a dependency command (add, list, remove)\n"
+  exit -1
+else
+  if [ $CMD == "remove" ] || [ $CMD == "rm" ]
+  then
+    if [ -z $DEP ]
+    then
+      printf "[dep] Please provide a dependency.\n"
+      exit -1
+    else
+      printf "[dep] Searching for dependency ...\n"
+      LINE=`grep -F $DEP $DEP_FILE`
+
+      if [ -z $LINE ]
+      then
+        printf "[dep] Dependency \"$DEP\" not found!\n"
+        printf "[dep] Exiting ...\n"
+        exit -1
+      else
+        printf "[dep] Dependency \"$DEP\" found as \"$LINE\"\n"
+        printf "[dep] Removing dependency from $DEP_FILE ...\n"
+        sed -i "/$DEP/d" $DEP_FILE
+        printf "[dep] Sorting $DEP_FILE ...\n\n"
+        sort $DEP_FILE -o $DEP_FILE
+        cat $DEP_FILE
+        printf "\n[dep] Dependency \"$LINE\" removed from $DEP_FILE.\n"
+        printf "[dep] Done.\n"
+        exit 0
+      fi
+    fi
+  elif [ $CMD == "add" ]
+  then
+    if [ -z $DEP ]
+    then
+      printf "[dep] Please provide a dependency.\n"
+      exit -1
+    else
+      printf "[dep] Searching for dependency ...\n"
+      LINE=`pip3 freeze | grep -F $DEP`
+
+      if [ -z $LINE ]
+      then
+        printf "[dep] Dependency \"$DEP\" not found!\n"
+        printf "[dep] Exiting ...\n"
+        exit -1
+      else
+        printf "[dep] Dependency \"$DEP\" found as \"$LINE\"\n"
+        printf "[dep] Adding dependency to $DEP_FILE (if absent) ...\n"
+        grep -qxF $LINE $DEP_FILE || printf "$LINE\n" >> $DEP_FILE
+        printf "[dep] Sorting $DEP_FILE ...\n\n"
+        sort $DEP_FILE -o $DEP_FILE
+        cat $DEP_FILE
+        printf "\n[dep] Dependency \"$LINE\" added to $DEP_FILE.\n"
+        printf "[dep] Done.\n"
+        exit 0
+      fi
+    fi
+  elif [ $CMD == "list" ] || [ $CMD == "ls" ]
+  then
+    cat $DEP_FILE
+  else
+    printf "[dep] Please provide a valid dependency command (add, list, rm)\n"
+    exit -1
+  fi
+fi
+

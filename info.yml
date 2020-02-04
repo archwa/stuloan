@@ -1,0 +1,7 @@
+principal: 10000.00
+rate: 0.2
+accrued_interest: 2000.00
+payment_schedule:
+  amount: 500
+  day: 15
+start_date: 2020-01-01
