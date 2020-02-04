@@ -108,22 +108,21 @@ class Calculation:
     ax.legend(loc='upper center')
     ax.grid(True)
     fig.autofmt_xdate()
-    plt.show()
-    plt.savefig('mygraph.png')
 
 
-try:
-  filename = sys.argv[1]
-except ValueError:
-  print('No filename provided.  Assuming default "info.yml".')
-  filename = 'info.yml'
+if __name__ == "__main__":
+  try:
+    filename = sys.argv[1]
+  except ValueError:
+    print('No filename provided.  Assuming default "info.yml".')
+    filename = 'info.yml'
 
-with open(filename, 'r') as fs:
-  params = yaml.safe_load(fs)
+  with open(filename, 'r') as fs:
+    params = yaml.safe_load(fs)
 
-print('Running with following parameters:')
-pprint(params)
-print()
+  print('Running with following parameters:')
+  pprint(params)
+  print()
 
-calc = Calculation(params)
-calc.run()
+  calc = Calculation(params)
+  calc.run()

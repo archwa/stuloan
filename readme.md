@@ -13,7 +13,13 @@ An example is provided in info.yml with a current principal balance of **$10,000
 
 \* *"Current" means the corresponding value at the start date, assuming interest has already accrued on that start date.*
 
-`info.yml`
+---
+
+## Example
+
+See `example.ipynb` for a working example.
+
+**info.yml**
 ```yaml
 principal: 10000.00
 rate: 0.2
