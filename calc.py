@@ -105,7 +105,7 @@ class Calculation:
     final_date = payment_dates[-1].strftime("%d %b'%y")
     ax.annotate(f'Grand Total (${payments[-1]:,.2f} on {final_date})', xy=(payment_dates[-1], payments[-1]), xytext=(payment_dates[round(len(payment_dates)*.74)], 0.73*payments[-1]), arrowprops=dict(facecolor='black', shrink=0.005, width=2), fontweight='bold')
 
-    ax.legend(loc='upper center')
+    ax.legend(loc='lower center')
     ax.grid(True)
     fig.autofmt_xdate()
 
